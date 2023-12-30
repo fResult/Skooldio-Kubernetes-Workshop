@@ -118,6 +118,15 @@ set -e
 mongoimport --host localhost --username $MONGODB_USERNAME --password $MONGODB_PASSWORD \
   --db $MONGODB_DATABASE --collection ratings --drop --file /docker-entrypoint-initdb.d/ratings_data.json
 ```
+> Note:
+> How can we know `$MONGODB_USERNAME`, `$MONGODB_PASSWORD`, and `$MONGODB_DATABASE` are able to use?
+>> Because of [HelmChart of Bitnami/Mongodb](https://github.com/bitnami/charts/tree/master/bitnami/mongodb) has `auth.username`, `auth.password`, and `auth.database`.\
+>> And the [DockerHub of Bitnami/Mongodb](https://hub.docker.com/r/bitnami/mongodb) in the `Creating a user and database on first run` topic has `$MONGODB_USERNAME`, `$MONGODB_PASSWORD`, and `$MONGODB_DATABASE`.\
+>> And the *HelmChart of Bitnami/Mongodb* also use this *Bitnami/Mongodb* in DockerHub.
+>>> So, that means we can use these three variables by default.\
+> How can we know that `ratings_data.json` is in `/docker-entrypoint-initdb.d`?
+>> In the [DockerHub of Bitnami/Mongodb](https://hub.docker.com/r/bitnami/mongodb) at the `Initializing a new instance` topic has explained detail.\
+>> And we can also use `$MONGODB_INITSCRIPTS_DIR` variable.
 
 * Run following commands to create configmap
 
