@@ -2,8 +2,8 @@
 
 ## Deploy Pod with Manifest File
 
-* `mkdir ~/k8s` to create folder for Kubernetes Manifest File
-* Create `01-pod.yaml` file with below content
+* `mkdir k8s` to create folder for Kubernetes Manifest File
+* Create `k8s/01-pod.yaml` file with below content
 
 ```yaml
 apiVersion: v1
@@ -23,9 +23,8 @@ spec:
 * Create pod from manifest file
 
 ```bash
-cd ~/k8s
 # Create resources as configured in manifest file
-kubectl apply -f 01-pod.yaml
+kubectl apply -f k8s/01-pod.yaml
 kubectl get pod
 
 # Try to get inside pod
