@@ -93,11 +93,11 @@ metadata:
   namespace: bookinfo-dev
 spec:
   rules:
-  - host: bookinfo.dev.opsta.net
+  - host: «hostname_or_ingress_ip»
     http:
       paths:
       - path: /ratings(/|$)(.*)
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: bookinfo-dev-ratings
