@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
         - name: bookinfo-dev-ratings
+          # Docker Registry
           image: asia.gcr.io/[PROJECT_ID]/bookinfo-ratings:dev
           imagePullPolicy: Always
           ports:
