@@ -92,7 +92,7 @@ spec:
 ```
 
 ```bash
-kubectl create -f 02-apache-deployment.yaml -f 02-apache-service.yaml --record
+kubectl create -f k8s/02-apache-deployment.yaml -f k8s/02-apache-service.yaml --record
 kubectl get deployments
 kubectl get services -w
 ```

@@ -73,7 +73,7 @@ data:
 * Create secret with following commands
 
 ```bash
-kubectl apply -f ~/bookinfo-secret/bookinfo-dev-ratings-mongodb-secret.yaml
+kubectl apply -f k8s/bookinfo-secret/bookinfo-dev-ratings-mongodb-secret.yaml
 kubectl get secret
 kubectl describe secret bookinfo-dev-ratings-mongodb-secret
 echo $(kubectl get secret bookinfo-dev-ratings-mongodb-secret \

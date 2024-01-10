@@ -18,8 +18,8 @@ kubectl describe secret registry-bookinfo
 
 ## Create Rating Service Kubernetes Manifest File
 
-* `mkdir -p ~/ratings/k8s/` to make a directory to store manifest file
-* Create `ratings-deployment.yaml` file inside `~/ratings/k8s/` directory with below content
+* `mkdir -p /k8s/ratings/` to make a directory to store manifest file
+* Create `ratings-deployment.yaml` file inside `/k8s/ratings/` directory with below content
 
 ```yaml
 apiVersion: apps/v1
@@ -64,7 +64,7 @@ spec:
       - name: registry-bookinfo
 ```
 
-* Create `ratings-service.yaml` file inside `~/ratings/k8s/` directory with below content
+* Create `ratings-service.yaml` file inside `k8s/ratings/` directory with below content
 
 ```yaml
 apiVersion: v1
@@ -80,7 +80,7 @@ spec:
     app: bookinfo-dev-ratings
 ```
 
-* Create `ratings-ingress.yaml` file inside `~/ratings/k8s/` directory with below content
+* Create `ratings-ingress.yaml` file inside `/k8s/ratings/` directory with below content
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -107,7 +107,7 @@ spec:
 
 ```bash
 # Create deployment resource
-kubectl apply -f k8s/
+kubectl apply -f k8s/ratings
 
 # Check status of each resource
 kubectl get deployment
