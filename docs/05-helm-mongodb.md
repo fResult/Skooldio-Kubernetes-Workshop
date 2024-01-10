@@ -82,6 +82,12 @@ echo $(kubectl get secret bookinfo-dev-ratings-mongodb-secret \
   -o jsonpath="{.data.mongodb-password}" | base64 --decode)
 ```
 
+* For the case we want to encode
+```bash
+echo -n ratings-dev-root | base64
+echo -n ratings-dev | base64
+```
+
 ### Prepare Helm Value file
 
 * Check `values.yaml` on <https://github.com/bitnami/charts/tree/master/bitnami/mongodb> to see all configuration
