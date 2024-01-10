@@ -8,11 +8,11 @@ metadata:
   namespace: bookinfo-dev
 spec:
   rules:
-  - host: «hostname_or_ingress_ip»
+  - host: «hostname_or_ingress_ip».nip.io
     http:
       paths:
       - path: /ratings(/|$)(.*)
-        pathType: ImplementationSpecific
+        pathType: Imple mentationSpecific
         backend:
           service:
             name: bookinfo-dev-ratings
