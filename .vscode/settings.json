@@ -1,8 +1,9 @@
 {
   "cSpell.words": [
-    "Bitnami",
+    "bitnami",
     "bookinfo",
     "configmap",
+    "dockerhub",
     "initdb",
     "INITSCRIPTS",
     "Kubeapps",

@@ -73,19 +73,13 @@ data:
 * Create secret with following commands
 
 ```bash
-kubectl apply -f k8s/bookinfo-secret/bookinfo-dev-ratings-mongodb-secret.yaml
+kubectl apply -f ~/bookinfo-secret/bookinfo-dev-ratings-mongodb-secret.yaml
 kubectl get secret
 kubectl describe secret bookinfo-dev-ratings-mongodb-secret
 echo $(kubectl get secret bookinfo-dev-ratings-mongodb-secret \
   -o jsonpath="{.data.mongodb-root-password}" | base64 --decode)
 echo $(kubectl get secret bookinfo-dev-ratings-mongodb-secret \
   -o jsonpath="{.data.mongodb-password}" | base64 --decode)
-```
-
-* For the case we want to encode
-```bash
-echo -n ratings-dev-root | base64
-echo -n ratings-dev | base64
 ```
 
 ### Prepare Helm Value file
