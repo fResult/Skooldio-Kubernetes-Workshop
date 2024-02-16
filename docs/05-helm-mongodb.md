@@ -133,8 +133,8 @@ mongoimport --host localhost --username $MONGODB_USERNAME --password $MONGODB_PA
 ```bash
 # Create configmap
 kubectl create configmap bookinfo-dev-ratings-mongodb-initdb \
-  --from-file=databases/ratings_data.json \
-  --from-file=databases/script.sh
+  --from-file=k8s/ratings/databases/ratings_data.json \
+  --from-file=k8s/ratings/databases/script.sh
 
 # Check config map
 kubectl get configmap
