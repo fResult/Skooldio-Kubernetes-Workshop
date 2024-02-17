@@ -34,20 +34,32 @@ spec:
               path: {{ .Values.ratings.healthCheckPath }}
               port: {{ .Values.ratings.port }}
               scheme: HTTP
+          {{- if .Values.extraEnv }}
           env:
-            # - name: SERVICE_VERSION
-            #   value: v1
-            - name: SERVICE_VERSION
-              value: {{ .Values.extraEnv.SERVICE_VERSION }}
-            - name: MONGO_DB_URL
-              value: {{ .Values.extraEnv.MONGO_DB_URL }}
-            - name: MONGO_DB_USERNAME
-              value: {{ .Values.extraEnv.MONGO_DB_USERNAME }}
+            {{- range $key, $val := .Values.extraEnv }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+            {{- if .Values.ratings.mongodbPasswordExistingSecret }}
             - name: MONGO_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.ratings.mongodbPasswordExistingSecret }}
-                  key: mongodb-password
+                  - name: {{ .Values.ratings.mongodbPasswordExistingSecret }}
+                    value: {{ .Values.ratings. }}
+            {{- end }}
+          {{- end }}
+          # env:
+            # - name: SERVICE_VERSION
+            #   value: {{ .Values.extraEnv.SERVICE_VERSION }}
+            # - name: MONGO_DB_URL
+            #   value: {{ .Values.extraEnv.MONGO_DB_URL }}
+            # - name: MONGO_DB_USERNAME
+            #   value: {{ .Values.extraEnv.MONGO_DB_USERNAME }}
+            # - name: MONGO_DB_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: {{ .Values.ratings.mongodbPasswordExistingSecret }}
+            #       key: mongodb-password
 
       imagePullSecrets:
         - name: {{ .Values.ratings.imagePullSecrets }}
