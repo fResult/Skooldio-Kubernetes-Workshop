@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bookinfo-dev-ratings
+  name: {{ .Release.Name }}
   namespace: bookinfo-dev
   labels:
-    app: bookinfo-dev-ratings
+    app: {{ .Release.Name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: bookinfo-dev-ratings
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: bookinfo-dev-ratings
+        app: {{ .Release.Name }}
     spec:
       containers:
-        - name: bookinfo-dev-ratings
+        - name: {{ .Release.Name }}
           # Docker Registry
           image: asia.gcr.io/[PROJECT_ID]/bookinfo-ratings:dev
           imagePullPolicy: Always
@@ -40,13 +40,13 @@ spec:
             - name: SERVICE_VERSION
               value: v2
             - name: MONGO_DB_URL
-              value: mongodb://bookinfo-dev-ratings-mongodb:27017/ratings-dev
+              value: mongodb://{{ .Release.Name }}-mongodb:27017/ratings-dev
             - name: MONGO_DB_USERNAME
               value: ratings-dev
             - name: MONGO_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: bookinfo-dev-ratings-mongodb-secret
+                  name: {{ .Release.Name }}-mongodb-secret
                   key: mongodb-password
 
       imagePullSecrets:

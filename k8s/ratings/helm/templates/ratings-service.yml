@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: bookinfo-dev-ratings
+  name: {{ .Release.Name }}
   namespace: bookinfo-dev
 spec:
   type: ClusterIP
   ports:
   - port: 9080
   selector:
-    app: bookinfo-dev-ratings
+    app: {{ .Release.Name }}
