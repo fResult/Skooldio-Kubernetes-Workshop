@@ -15,7 +15,7 @@ spec:
     http:
       paths:
       - path: {{ .Values.ingress.path }}
-        pathType: Imple mentationSpecific
+        pathType: ImplementationSpecific
         backend:
           service:
             name: {{ .Release.Name }}
