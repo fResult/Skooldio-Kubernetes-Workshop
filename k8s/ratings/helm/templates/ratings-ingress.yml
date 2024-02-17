@@ -5,16 +5,16 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$2
   name: {{ .Release.Name }}
-  namespace: bookinfo-dev
+  namespace: {{ .Values.ratings.namespace }}
 spec:
   rules:
-  - host: «hostname_or_ingress_ip».nip.io
+  - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: /ratings(/|$)(.*)
+      - path: {{ .Values.ingress.path }}
         pathType: Imple mentationSpecific
         backend:
           service:
             name: {{ .Release.Name }}
             port:
-              number: 9080
+              number: {{ .Values.ratings.port }}

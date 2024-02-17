@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: bookinfo-dev
+  namespace: {{ .Values.ratings.namespace }}
   labels:
     app: {{ .Release.Name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.ratings.replicas }}
   selector:
     matchLabels:
       app: {{ .Release.Name }}
@@ -18,36 +18,36 @@ spec:
       containers:
         - name: {{ .Release.Name }}
           # Docker Registry
-          image: asia.gcr.io/[PROJECT_ID]/bookinfo-ratings:dev
+          image: {{ .Values.ratings.image }}:{{ .Values.ratings.tag }}
           imagePullPolicy: Always
           ports:
-            - containerPort: 9080
+            - containerPort: {{ .Values.ratings.port }}
               name: web-port
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /health
-              port: 9080
+              path: {{ .Values.ratings.healthCheckPath }}
+              port: {{ .Values.ratings.port }}
               scheme: HTTP
           readinessProbe:
             httpGet:
-              path: /health
-              port: 9080
+              path: {{ .Values.ratings.healthCheckPath }}
+              port: {{ .Values.ratings.port }}
               scheme: HTTP
           env:
             # - name: SERVICE_VERSION
             #   value: v1
             - name: SERVICE_VERSION
-              value: v2
+              value: {{ .Values.extraEnv.SERVICE_VERSION }}
             - name: MONGO_DB_URL
-              value: mongodb://{{ .Release.Name }}-mongodb:27017/ratings-dev
+              value: {{ .Values.extraEnv.MONGO_DB_URL }}
             - name: MONGO_DB_USERNAME
-              value: ratings-dev
+              value: {{ .Values.extraEnv.MONGO_DB_USERNAME }}
             - name: MONGO_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-mongodb-secret
+                  name: {{ .Values.ratings.mongodbPasswordExistingSecret }}
                   key: mongodb-password
 
       imagePullSecrets:
-        - name: registry-bookinfo
+        - name: {{ .Values.ratings.imagePullSecrets }}
